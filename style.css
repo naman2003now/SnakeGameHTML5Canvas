@@ -1,0 +1,54 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #323232;
+}
+p{
+    color: #fafafa;
+}
+h1{
+    color: #fafafa;
+}
+div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#pause{
+    background-color: #323232;
+    border: 10px solid;
+    border-top: 0px;
+    border-color: #fafafa;
+    color: #fafafa;
+    width: 420px;
+}
+#pause:hover{
+    animation: hoverAnimation 0.25s forwards;
+}
+
+@keyframes hoverAnimation {
+    from{
+        background-color: #323232;
+        border: 10px solid;
+        border-top: 0px;
+        border-color: #fafafa;
+        color: #fafafa;
+        width: 420px;
+    }
+    to{
+        background-color: #fafafa;
+        border: 10px solid;
+        border-top: 0px;
+        border-color: #fafafa;
+        color: #323232;
+        width: 420px;
+    }
+    
+}
+#container{
+    border: 20px solid;
+    border-color: #fafafa;
+}
