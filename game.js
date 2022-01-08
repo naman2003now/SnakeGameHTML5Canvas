@@ -19,9 +19,9 @@ export class Game{
         let x = coordinates.x * this.resolution.x / this.gridsize.x
         let y = coordinates.y * this.resolution.y / this.gridsize.y
         this.context.fillStyle = color
-        this.context.fillRect(x, y, this.resolution.x/this.gridsize.x, this.resolution.y/this.gridsize.y)
+        this.context.fillRect(x + 2, y + 2, (this.resolution.x/this.gridsize.x) - 4, (this.resolution.y/this.gridsize.y) - 4)
     }
-
+waw
     clear = () => {
         this.context.fillStyle = this.colors.background
         this.context.fillRect(0, 0, this.resolution.x, this.resolution.y)
