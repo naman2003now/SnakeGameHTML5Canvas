@@ -49,14 +49,14 @@ export class Snake{
 
     check = (gridSize, food) => {
 
-        if(this.elements.slice(1, this.elements.length).includes(this.elements[0])){
+        if(this.elements.slice(1, this.elements.length).some((element) => (this.elements[0].x == element.x && this.elements[0].y == element.y))){
             console.log("AteAway")
             return true
         }else if(
             this.elements[0].x < 0 || 
             this.elements[0].y < 0 ||
             this.elements[0].x >= gridSize.x || 
-            this.elements[0].y > gridSize.y){
+            this.elements[0].y >= gridSize.y){
 
             return true
         }

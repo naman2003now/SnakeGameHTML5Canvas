@@ -10,6 +10,7 @@ export class Game{
         this.snake = new Snake()
         this.controls = settings.controls
         this.food = new Food(this.gridsize)
+        this.scoreBoard = settings.scoreBoard
         this.availableForEvents = true
     }
 
@@ -37,9 +38,10 @@ export class Game{
         this.availableForEvents = true
         this.snake.update()
         if(this.snake.check(this.gridsize, this.food)){
-            console.log("GameOver")
+            this.snake = new Snake();
         }
         this.draw()
+        this.scoreBoard.innerHTML = "Score: " + this.snake.elements.length
     }
 
     eventLoop = (event) => {

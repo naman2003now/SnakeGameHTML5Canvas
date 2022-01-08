@@ -16,11 +16,11 @@ let settings = {
         right:  [39, 68],
         up:     [87, 38],
         down:   [40, 83]
-    }
+    },
+    scoreBoard: document.getElementById("score")
 }
 
 let game = new Game(settings)
 
 document.body.addEventListener('keydown', (event) => {game.eventLoop(event)})
-
 setInterval(game.gameLoop, 1000/frameRate)
