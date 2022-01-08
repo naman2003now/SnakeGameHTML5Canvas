@@ -48,6 +48,7 @@ export class Game{
     }
 
     togglePause = () => {
+        console.log("Toggle Pause")
         this.playing = !this.playing
     }
 
