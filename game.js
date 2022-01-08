@@ -12,6 +12,7 @@ export class Game{
         this.food = new Food(this.gridsize)
         this.scoreBoard = settings.scoreBoard
         this.availableForEvents = true
+        this.playing = true
     }
 
     drawRect = (coordinates, color) => {
@@ -35,13 +36,19 @@ export class Game{
     }
 
     gameLoop = () => {
-        this.availableForEvents = true
-        this.snake.update()
-        if(this.snake.check(this.gridsize, this.food)){
-            this.snake = new Snake();
+        if(this.playing){
+            this.availableForEvents = true
+            this.snake.update()
+            if(this.snake.check(this.gridsize, this.food)){
+                this.snake = new Snake();
+            }
+            this.draw()
+            this.scoreBoard.innerHTML = "Score: " + this.snake.elements.length
         }
-        this.draw()
-        this.scoreBoard.innerHTML = "Score: " + this.snake.elements.length
+    }
+
+    togglePause = () => {
+        this.playing = !this.playing
     }
 
     eventLoop = (event) => {
