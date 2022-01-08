@@ -35,6 +35,10 @@ export class Game{
 
     gameLoop = () => {
         this.availableForEvents = true
+        this.snake.update()
+        if(this.snake.check(this.gridsize, this.food)){
+            console.log("GameOver")
+        }
         this.draw()
     }
 
