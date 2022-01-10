@@ -1,6 +1,6 @@
 import { Game } from "./game.js"
 
-var frameRate = 10
+var frameRate = 5
 var resolution = {height: 400, width: 400}
 
 let canvas = document.getElementById("canvas")
