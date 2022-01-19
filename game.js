@@ -12,7 +12,7 @@ export class Game{
         this.food = new Food(this.gridsize)
         this.scoreBoard = settings.scoreBoard
         this.availableForEvents = true
-        this.playing = false
+        this.playing = true
     }
 
     drawRect = (coordinates, color) => {
