@@ -12,7 +12,7 @@ export class Game{
         this.food = new Food(this.gridsize)
         this.scoreBoard = settings.scoreBoard
         this.availableForEvents = true
-        this.playing = true
+        this.playing = false
     }
 
     drawRect = (coordinates, color) => {
@@ -38,19 +38,30 @@ export class Game{
         let pathQueue = []
         let checkedLocation = []
         if(this.check(this.gridsize, {x:this.snake.elements[0].x + 1, y:this.snake.elements[0].y})){
-            pathQueue.push('r')
+            pathQueue.push({path:'r', weight:1})
         }
         if(this.check(this.gridsize, {x:this.snake.elements[0].x, y:this.snake.elements[0].y + 1})){
-            pathQueue.push('d')
+            pathQueue.push({path:'d', weight:1})
         }
         if(this.check(this.gridsize, {x:this.snake.elements[0].x, y:this.snake.elements[0].y - 1})){
-            pathQueue.push('u')
+            pathQueue.push({path:'u', weight:1})
         }
         if(this.check(this.gridsize, {x:this.snake.elements[0].x - 1, y:this.snake.elements[0].y})){
-            pathQueue.push('l')
+            pathQueue.push({path:'l', weight:1})
         }
         while(pathQueue.length != 0){
-            let currentPath = pathQueue.shift()
+            let min = 1000000000
+            let pathIndex = 0
+            let currentPath = 0
+            for(let i = 0; i < pathQueue.length; i++){
+                let element = pathQueue[i]
+                if(min > element.weight){
+                    currentPath = element.path
+                    min = element.weight
+                    pathIndex = i
+                }
+            }
+            pathQueue.splice(pathIndex, 1)
             let currentLocation = {x: this.snake.elements[0].x, y: this.snake.elements[0].y}
             for(let i = 0; i < currentPath.length; i++){
                 switch(currentPath[i]){
@@ -68,24 +79,26 @@ export class Game{
                     break
                 }
             }
+            this.drawRect(currentLocation, "rgb(51, 53 , 51)")
             if(currentLocation.x == this.food.position.x && currentLocation.y == this.food.position.y){
                 this.snake.direction = currentPath[0]
                 return currentPath
             }
             if(this.check(this.gridsize, {x:currentLocation.x + 1, y:currentLocation.y}) && !checkedLocation.some((element) => (currentLocation.x == element.x && currentLocation.y == element.y))){
-                pathQueue.push(currentPath + 'r')
+                pathQueue.push({path: currentPath + 'r', weight: Math.abs(currentLocation.x - this.food.position.x) + Math.abs(currentLocation.y - this.food.position.y)})
             }
             if(this.check(this.gridsize, {x:currentLocation.x, y:currentLocation.y + 1}) && !checkedLocation.some((element) => (currentLocation.x == element.x && currentLocation.y == element.y))){
-                pathQueue.push(currentPath + 'd')
+                pathQueue.push({path: currentPath + 'd', weight: Math.abs(currentLocation.x - this.food.position.x) + Math.abs(currentLocation.y - this.food.position.y)})
             }
             if(this.check(this.gridsize, {x:currentLocation.x, y:currentLocation.y - 1}) && !checkedLocation.some((element) => (currentLocation.x == element.x && currentLocation.y == element.y))){
-                pathQueue.push(currentPath + 'u')
+                pathQueue.push({path: currentPath + 'u', weight: Math.abs(currentLocation.x - this.food.position.x) + Math.abs(currentLocation.y - this.food.position.y)})
             }
             if(this.check(this.gridsize, {x:currentLocation.x - 1, y:currentLocation.y}) && !checkedLocation.some((element) => (currentLocation.x == element.x && currentLocation.y == element.y))){
-                pathQueue.push(currentPath + 'l')
+                pathQueue.push({path: currentPath + 'l', weight: Math.abs(currentLocation.x - this.food.position.x) + Math.abs(currentLocation.y - this.food.position.y)})
             }
             checkedLocation.push(currentLocation)
         }
+        return "randi"
     }
 
     check = (gridSize, coord) => {
