@@ -22,6 +22,6 @@ let settings = {
 
 let game = new Game(settings)
 
-document.body.addEventListener('keydown', (event) => {game.eventLoop(event)})
+// document.body.addEventListener('keydown', (event) => {game.eventLoop(event)})
 document.getElementById("pause").addEventListener('click', () => {game.togglePause()})
 setInterval(game.gameLoop, 1000/frameRate)
